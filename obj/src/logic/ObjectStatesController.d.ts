@@ -1,0 +1,30 @@
+import { ConfigParams } from 'pip-services3-commons-node';
+import { IConfigurable } from 'pip-services3-commons-node';
+import { IReferences } from 'pip-services3-commons-node';
+import { IReferenceable } from 'pip-services3-commons-node';
+import { FilterParams } from 'pip-services3-commons-node';
+import { PagingParams } from 'pip-services3-commons-node';
+import { DataPage } from 'pip-services3-commons-node';
+import { ICommandable } from 'pip-services3-commons-node';
+import { CommandSet } from 'pip-services3-commons-node';
+import { ObjectStateV1 } from '../data/version1/ObjectStateV1';
+import { ObjectStatesV1 } from '../data/version1/ObjectStatesV1';
+import { IObjectStatesController } from './IObjectStatesController';
+export declare class ObjectStatesController implements IConfigurable, IReferenceable, ICommandable, IObjectStatesController {
+    private static _defaultConfig;
+    private _dependencyResolver;
+    private _persistence;
+    private _commandSet;
+    private _intervalMin;
+    private _interval;
+    configure(config: ConfigParams): void;
+    setReferences(references: IReferences): void;
+    getCommandSet(): CommandSet;
+    getStates(correlationId: string, filter: FilterParams, paging: PagingParams, callback: (err: any, page: DataPage<ObjectStatesV1>) => void): void;
+    getTimelineStates(correlationId: string, time: Date, filter: FilterParams, callback: (err: any, states: ObjectStateV1[]) => void): void;
+    private fixState;
+    private calculateStartTime;
+    addState(correlationId: string, state: ObjectStateV1, callback?: (err: any) => void): void;
+    addStates(correlationId: string, states: ObjectStateV1[], callback?: (err: any) => void): void;
+    deleteStates(correlationId: string, filter: FilterParams, callback?: (err: any) => void): void;
+}
